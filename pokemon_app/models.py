@@ -8,3 +8,11 @@ class User(models.Model):
     
     def __str__(self):
         return self.user_name;
+
+class Favorite(models.Model):
+    favorite_pokemon = models.CharField(max_length=255, blank=False)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='favorites')
+
+class FanArt(models.Model):
+    url = models.URLField(max_length=100, blank=False)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='fanarts')
