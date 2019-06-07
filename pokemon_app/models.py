@@ -1,5 +1,6 @@
 from django.db import models
 from django import forms
+from datetime import datetime
 
 # Create your models here.
 class User(models.Model):
@@ -11,8 +12,9 @@ class User(models.Model):
 
 class Favorite(models.Model):
     favorite_pokemon = models.CharField(max_length=255, blank=False)
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='favorites')
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='favorites', blank=False)
 
 class FanArt(models.Model):
     url = models.URLField(max_length=100, blank=False)
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='fanarts')
+    create_date = models.DateField(default=datetime.now, blank=False)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='fanarts', blank=False)

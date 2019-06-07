@@ -1,6 +1,9 @@
-# tunr_app/urls.py
-from django.urls import path, include
-from . import views
+from rest_framework import routers
+from .views import UserList, FavoriteList, FanArtList
 
-urlpatterns = [
-]
+router = routers.SimpleRouter()
+router.register('users', UserList)
+router.register('favorites', FavoriteList)
+router.register('fanarts', FanArtList)
+
+urlpatterns = router.urls
