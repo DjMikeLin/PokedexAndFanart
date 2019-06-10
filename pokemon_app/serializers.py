@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from .models import User, Favorite, FanArt
+import requests
 
 class FanArtSerializer(serializers.ModelSerializer):
     class Meta:
@@ -17,3 +18,9 @@ class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ("id", "user_name", "password", "favorites", "fanarts")
+
+class PokedexSerializer(serializers.ModelSerializer):
+    #name = serializers.CharField(max_length=200)
+    image_url = requests.get('https://pokeapi.co/api/v2/pokemon/bulbasaur').json()['sprites']['front_default']
+    print(image_url);
+    #front_default_url = serializers.URLField(max_length=200)

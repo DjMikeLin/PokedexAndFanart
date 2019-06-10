@@ -12,6 +12,7 @@ djangorestframework = "*"
 gunicorn = "*"
 django-heroku = "*"
 psycopg2-binary = "*"
+requests = "*"
 
 [requires]
 python_version = "3.7"
