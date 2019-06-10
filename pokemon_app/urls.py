@@ -5,6 +5,6 @@ router = routers.SimpleRouter()
 router.register('users', UserList)
 router.register('favorites', FavoriteList)
 router.register('fanarts', FanArtList)
-router.register('pokedex', PokedexList, base_name='pokedex')
+router.register(r'pokedex/(?P<offset>[\w-]+)', PokedexList, base_name='pokedex')
 
 urlpatterns = router.urls

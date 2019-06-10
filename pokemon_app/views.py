@@ -17,8 +17,8 @@ class FanArtList(viewsets.ModelViewSet):
     serializer_class = FanArtSerializer
 
 class PokedexList(viewsets.ViewSet):
-    def list(self, request):
-        results = requests.get('https://pokeapi.co/api/v2/pokemon/?offset=0&limit=30').json()['results'];
+    def list(self, request, offset):
+        results = requests.get(f'https://pokeapi.co/api/v2/pokemon/?offset={offset}&limit=30').json()['results'];
         for result in results:
             result['url'] = requests.get(result['url']).json()['sprites']['front_default']
         
