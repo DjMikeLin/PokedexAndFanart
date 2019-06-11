@@ -3,9 +3,7 @@ import Loginform from './components/Loginform';
 
 function App() {
   return (
-    <body>
         <Loginform />
-    </body>
   );
 }
 

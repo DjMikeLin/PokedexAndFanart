@@ -5,8 +5,11 @@ import requests
 from rest_framework.response import Response
 
 class UserList(viewsets.ModelViewSet):
-    queryset = User.objects.all()
     serializer_class = UserSerializer
+    def get_queryset(self):
+        user = self.kwargs['user']
+        print(user)
+        return User.objects.filter(user_name=user)
 
 class FavoriteList(viewsets.ModelViewSet):
     queryset = Favorite.objects.all()
