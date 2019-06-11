@@ -5,7 +5,7 @@ export async function findUser(userName){
 }
 
 export async function createUser(userName, password){
-    return await axios.post('/api/v1/users/', {user_name: userName, password});
+    return await axios.post('/api/v1/users/', {"user_name": userName, password});
 }
 
 export async function test(){

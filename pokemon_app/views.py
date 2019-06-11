@@ -4,7 +4,11 @@ from .models import User, Favorite, FanArt
 import requests
 from rest_framework.response import Response
 
-class UserList(viewsets.ModelViewSet):
+class UsersList(viewsets.ModelViewSet):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer     
+
+class UserList(viewsets.ReadOnlyModelViewSet):
     serializer_class = UserSerializer
     def get_queryset(self):
         user = self.kwargs['user']

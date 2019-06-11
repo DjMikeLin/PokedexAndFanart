@@ -1,6 +1,6 @@
 import React from 'react';
 import {findUser} from './axiosRouter';
-import {BrowserRouter as Link} from 'react-router-dom';
+import {BrowserRouter as Router, NavLink} from 'react-router-dom';
 
 class Loginform extends React.Component {
     state = {
@@ -51,7 +51,11 @@ class Loginform extends React.Component {
                     <button type="submit">Login</button>
                 </form>:null
             }
-                <button><Link to="/newAccount">New Account</Link></button>
+                <button>
+                    <NavLink to="/newAccount">
+                        New Account
+                    </NavLink>
+                </button>
                 <p>{this.state.errorMssg}</p>
             </div>
         )
