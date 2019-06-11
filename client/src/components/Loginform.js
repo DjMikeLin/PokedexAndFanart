@@ -1,6 +1,6 @@
 import React from 'react';
 import {findUser} from './axiosRouter';
-import {BrowserRouter as Router, NavLink} from 'react-router-dom';
+import {BrowserRouter as Router, Redirect, NavLink} from 'react-router-dom';
 
 class Loginform extends React.Component {
     state = {
@@ -39,6 +39,14 @@ class Loginform extends React.Component {
     }
 
     render(){
+        if(!this.state.showLogin)
+            return <Redirect to={{pathname: '/loggedIn', state: { name: this.state.name, 
+                                    password: this.state.password, 
+                                    fanarts: this.state.fanarts, 
+                                    favorites: this.state.favorites
+                                }
+            }}/>;           
+
         return(
             <div>
             {

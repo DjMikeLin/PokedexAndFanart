@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 export async function findUser(userName){
-    return await axios.get('/api/v1/users/' + userName);
+    return await axios.get('/api/v1/users/find/' + userName);
 }
 
 export async function createUser(userName, password){
