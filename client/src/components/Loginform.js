@@ -1,5 +1,6 @@
 import React from 'react';
 import {findUser} from './axiosRouter';
+import {BrowserRouter as Link} from 'react-router-dom';
 
 class Loginform extends React.Component {
     state = {
@@ -39,17 +40,19 @@ class Loginform extends React.Component {
 
     render(){
         return(
-            <div>{
-            this.state.showLogin?
-            <form onSubmit={this.submitLogin}>
-                <label>Username: </label>
-                <input type="text" name="name" onChange={this.handleChange}/>
-                <label>Password: </label>
-                <input type="password" name="password" onChange={this.handleChange}/>
-                <button type="submit">Login</button>
-            </form>:null}
-
-            <p>{this.state.errorMssg}</p>
+            <div>
+            {
+                this.state.showLogin?
+                <form onSubmit={this.submitLogin}>
+                    <label>Username: </label>
+                    <input type="text" name="name" onChange={this.handleChange}/>
+                    <label>Password: </label>
+                    <input type="password" name="password" onChange={this.handleChange}/>
+                    <button type="submit">Login</button>
+                </form>:null
+            }
+                <button><Link to="/newAccount">New Account</Link></button>
+                <p>{this.state.errorMssg}</p>
             </div>
         )
     }
