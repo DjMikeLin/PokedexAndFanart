@@ -1,6 +1,6 @@
 import React from 'react';
 import {findUser} from './axiosRouter';
-import {BrowserRouter as Router, Redirect, NavLink} from 'react-router-dom';
+import {Redirect, NavLink} from 'react-router-dom';
 
 class Loginform extends React.Component {
     state = {

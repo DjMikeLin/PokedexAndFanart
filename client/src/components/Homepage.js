@@ -1,7 +1,5 @@
 import React from 'react';
-import UpdateUser from './UpdateUser';
 import Navbar from './Navbar'; 
-import {BrowserRouter as Router, NavLink} from 'react-router-dom';
 
 class Homepage extends React.Component{
     state = {

@@ -1,6 +1,6 @@
 import React from 'react';
 import {createUser} from './axiosRouter';
-import {BrowserRouter as Router, Redirect} from 'react-router-dom';
+import {Redirect} from 'react-router-dom';
 
 class CreateUser extends React.Component{
     state = {

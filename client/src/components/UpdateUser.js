@@ -1,6 +1,6 @@
 import React from 'react';
 import {updateUser, deleteUser} from './axiosRouter';
-import {BrowserRouter as Router, Redirect} from 'react-router-dom';
+import {Redirect} from 'react-router-dom';
 
 class UpdateUser extends React.Component{
     state = {

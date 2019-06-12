@@ -15,6 +15,6 @@ class Favorite(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='favorites', blank=False)
 
 class FanArt(models.Model):
-    url = models.URLField(max_length=100, blank=False)
-    create_date = models.DateField(default=datetime.now, blank=False)
+    url = models.URLField(max_length=500, blank=False)
+    create_date = models.DateTimeField(default=datetime.now, blank=False)
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='fanarts', blank=False)
