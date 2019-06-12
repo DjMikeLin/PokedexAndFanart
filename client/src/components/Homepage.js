@@ -1,10 +1,13 @@
 import React from 'react';
 import UpdateUser from './UpdateUser';
+import Navbar from './Navbar'; 
+import {BrowserRouter as Router, NavLink} from 'react-router-dom';
 
 class Homepage extends React.Component{
     state = {
         user: {
-            name: '',
+            id: '',
+            user_name: '',
             password: '',
             fanarts: '',
             favorites: ''
@@ -17,7 +20,7 @@ class Homepage extends React.Component{
 
     render(){
         return(
-            <p>hi</p>
+            <Navbar user={this.state.user}/> 
         )
     }
 }
