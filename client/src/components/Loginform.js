@@ -53,16 +53,13 @@ class Loginform extends React.Component {
 
         return(
             <div>
-            {
-                this.state.showLogin?
                 <form onSubmit={this.submitLogin}>
                     <label>Username: </label>
                     <input type="text" name="user_name" onChange={this.handleChange}/>
                     <label>Password: </label>
                     <input type="password" name="password" onChange={this.handleChange}/>
                     <button type="submit">Login</button>
-                </form>:null
-            }
+                </form>
                 <button>
                     <NavLink to="/newAccount">
                         New Account

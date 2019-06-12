@@ -4,6 +4,7 @@ import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import CreateUser from './components/CreateUser';
 import Homepage from './components/Homepage';
 import UpdateUser from './components/UpdateUser';
+import AddFanArt from './components/AddFanArt';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
                     <Route exact path="/newAccount" component={CreateUser}/>
                     <Route exact path="/loggedIn" component={Homepage}/>
                     <Route exact path="/loggedIn/update" component={UpdateUser}/>
+                    <Route exact path='/loggedIn/postArt' component={AddFanArt}/>
                 </Switch>
             </Router>}
         </div>
