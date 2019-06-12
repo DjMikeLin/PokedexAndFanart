@@ -24,6 +24,10 @@ export async function deleteImage(id){
     return await axios.delete('/api/v1/fanarts/' + id);
 }
 
-export async function test(){
-    return await axios.get('/api/v1/pokedex/60');
+export async function pokedex(offset){
+    return await axios.get('/api/v1/pokedex/' + offset);
+}
+
+export async function addFavorite(name, userId){
+    return await axios.post('/api/v1/favorites/', {"favorite_pokemon": name, "user": userId});
 }
