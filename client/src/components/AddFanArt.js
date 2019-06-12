@@ -1,5 +1,5 @@
 import React from 'react';
-import {addArt} from './axiosRouter';
+import {addArt, deleteImage} from './axiosRouter';
 import Navbar from './Navbar';
 
 class AddFanArt extends React.Component{
@@ -11,7 +11,7 @@ class AddFanArt extends React.Component{
             id: '',
             user_name: '',
             password: '',
-            fanarts: [],
+            fanarts: [{}],
             favorites: []
         } 
     }
@@ -63,6 +63,19 @@ class AddFanArt extends React.Component{
         userCopy.fanarts.push(result);
         this.setState({showError: true, errorMssg: 'Successfully added image! Please feel free to add another', user: userCopy});  
     }
+    //handler for deleting a specific fanArt
+    deleteImage = async(e) => {
+        e.preventDefault();
+        
+        let fanArtIndex = e.target.parentElement.getAttribute('index'); 
+        let fanArtModelId = this.state.user.fanarts[fanArtIndex].id;
+        //Delete from database
+        await deleteImage(fanArtModelId);
+        //Delete from user fanarts in state
+        const userCopy = {...this.state.user};
+        userCopy.fanarts.splice(fanArtIndex, 1);
+        this.setState({user: userCopy}); 
+    }
 
     render(){
         return(
@@ -76,6 +89,14 @@ class AddFanArt extends React.Component{
                 <img src={this.state.currUrl} alt='' onError={this.invalidURL}/>
                 {
                     this.state.showError ? <p>{this.state.errorMssg}</p> : null
+                }
+                {
+                    this.state.user.fanarts.map((element, index) =>
+                        <div key={index} index={index}> 
+                            <img src={element.url} alt="Not Found"/>
+                            <button onClick={this.deleteImage}>Delete</button> 
+                        </div>
+                    )
                 }
             </div>
         )

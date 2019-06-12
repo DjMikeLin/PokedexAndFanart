@@ -20,6 +20,10 @@ export async function addArt(url, userId){
     return await axios.post('/api/v1/fanarts/', {"url": url, "user": userId});
 }
 
+export async function deleteImage(id){
+    return await axios.delete('/api/v1/fanarts/' + id);
+}
+
 export async function test(){
     return await axios.get('/api/v1/pokedex/60');
 }
