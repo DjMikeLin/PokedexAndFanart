@@ -13,11 +13,16 @@ class Favorites extends React.Component{
         } 
     }
 
-    updateFavs = async(user) => {
-        await this.setState({user});
+    componentDidMount = () => {
+        this.setState({user: this.props.location.state});
+    }
+
+    updateFavs = user => {
+        this.setState({user});
     }
 
     render(){
+        console.log(this.props.location.state);
         return(
             <div>
                 <Navbar user={this.state.user}/>
