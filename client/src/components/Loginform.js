@@ -25,7 +25,7 @@ class Loginform extends React.Component {
             if(!err){
                 let result = (await findUser(values.username)).data[0];
                 //if username is not found or password does not match 
-                if(result === undefined || this.state.password !== result.password){
+                if(result === undefined || values.password !== result.password){
                     this.setState({errorMssg: 'Wrong Username or Password!'});
                     return;
                 }
