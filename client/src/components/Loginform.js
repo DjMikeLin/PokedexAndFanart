@@ -1,6 +1,12 @@
 import React from 'react';
 import {findUser} from './axiosRouter';
 import {Redirect, NavLink} from 'react-router-dom';
+import { Form, Icon, Input, Button, Checkbox } from 'antd';
+import styled from 'styled-components';
+
+const StyledButton = styled(Button)`
+    width: 200px;
+`;
 
 class Loginform extends React.Component {
     state = {
@@ -15,31 +21,26 @@ class Loginform extends React.Component {
 
     submitLogin = async(e) => {
         e.preventDefault();
-
-        let result = (await findUser(this.state.user_name)).data[0];
-        //if username is not found or password does not match 
-        if(result === undefined || this.state.password !== result.password){
-            this.setState({errorMssg: 'Wrong Username or Password!'});
-            return;
-        }
-        this.setState({showLogin: false, id: result.id, fanarts: result.fanarts, favorites: result.favorites});
+        this.props.form.validateFields(async(err, values) => {
+            if(!err){
+                let result = (await findUser(values.username)).data[0];
+                //if username is not found or password does not match 
+                if(result === undefined || this.state.password !== result.password){
+                    this.setState({errorMssg: 'Wrong Username or Password!'});
+                    return;
+                }
+                //default
+                this.setState({showLogin: false, id: result.id, fanarts: result.fanarts, favorites: result.favorites});
+            }
+        });
     }
 
-    handleChange = e => {
-        this.setState({errorMssg: ''});
-        switch(e.target.name){
-            case 'user_name':
-                this.setState({user_name: e.target.value});
-                break;
-            case 'password':
-                this.setState({password: e.target.value});
-                break;
-            default:
-                break; 
-        }
+    componentDidMount = () => {
+        this.setState({id: '', user_name: '', password: '', showLogin: true, errorMssg: '', fanarts: [], favorites: []});
     }
 
     render(){
+        const { getFieldDecorator } = this.props.form;
         if(!this.state.showLogin)
             return <Redirect to={{pathname: '/loggedIn', state: 
                                 { 
@@ -53,21 +54,39 @@ class Loginform extends React.Component {
 
         return(
             <div>
-                <form onSubmit={this.submitLogin}>
-                    <label>Username: </label>
-                    <input type="text" name="user_name" onChange={this.handleChange}/>
-                    <label>Password: </label>
-                    <input type="password" name="password" onChange={this.handleChange}/>
-                    <button type="submit">Login</button>
-                </form>
-                <button>
+                <Form onSubmit={this.submitLogin} className="login-form">
+                    <Form.Item>
+                      {getFieldDecorator('username', {
+                        rules: [{ required: true, message: 'Please input your username!' }],
+                      })(
+                        <Input
+                          prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
+                          placeholder="Username"
+                        />,
+                      )}
+                    </Form.Item>
+                    <Form.Item>
+                      {getFieldDecorator('password', {
+                        rules: [{ required: true, message: 'Please input your password!' }],
+                      })(
+                        <Input
+                          prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
+                          placeholder="Password"
+                          type="password"
+                        />,
+                      )}
+                    </Form.Item>
+                    <StyledButton type="primary" value="large" htmlType="submit">Login</StyledButton>
+                </Form>
+                <StyledButton type="primary" value="large">
                     <NavLink to="/newAccount">
-                        New Account
+                        Sign Up
                     </NavLink>
-                </button>
+                </StyledButton>
                 <p>{this.state.errorMssg}</p>
             </div>
         )
     }
 }
-export default Loginform;
+const VerticalLogin = Form.create({ name: 'vert_login' })(Loginform);
+export default VerticalLogin;

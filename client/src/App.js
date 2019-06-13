@@ -7,6 +7,7 @@ import UpdateUser from './components/UpdateUser';
 import AddFanArt from './components/AddFanArt';
 import Pokedex from './components/Pokedex';
 import Favorites from './components/Favorites';
+import './App.css';
 
 function App() {
   return (
