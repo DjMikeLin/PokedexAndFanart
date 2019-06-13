@@ -31,3 +31,7 @@ export async function pokedex(offset){
 export async function addFavorite(name, userId){
     return await axios.post('/api/v1/favorites/', {"favorite_pokemon": name, "user": userId});
 }
+
+export async function deleteFavorite(id){
+    return await axios.delete('/api/v1/favorites/' + id);
+}

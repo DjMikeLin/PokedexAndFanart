@@ -6,6 +6,7 @@ import Homepage from './components/Homepage';
 import UpdateUser from './components/UpdateUser';
 import AddFanArt from './components/AddFanArt';
 import Pokedex from './components/Pokedex';
+import Favorites from './components/Favorites';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
                     <Route exact path="/loggedIn/update" component={UpdateUser}/>
                     <Route exact path='/loggedIn/postArt' component={AddFanArt}/>
                     <Route exact path='/loggedIn/pokedex' component={Pokedex}/>
+                    <Route exact path='/loggedIn/favorites' component={Favorites}/>
                 </Switch>
             </Router>}
         </div>

@@ -33,7 +33,7 @@ class PokedexEntry extends React.Component{
                     this.state.showAddFav ? 
                     <button onClick={this.addFav}>Add To Favorites</button> : null
                 }
-                <img src={this.props.entry.url} alt='No Image Found'/> 
+                <img src={this.props.entry.url} alt=''/> 
             </div>   
         )
     }

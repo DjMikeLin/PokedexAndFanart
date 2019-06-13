@@ -24,7 +24,6 @@ class Pokedex extends React.Component{
     }
 
     render(){
-        console.log(this.props.location.state);
         return(
             <div>
                 <Navbar user={this.state.user}/>
