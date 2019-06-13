@@ -1,11 +1,27 @@
 import React from 'react';
 import {findUser} from './axiosRouter';
 import {Redirect, NavLink} from 'react-router-dom';
-import { Form, Icon, Input, Button, Checkbox } from 'antd';
+import { Form, Icon, Input, Button } from 'antd';
 import styled from 'styled-components';
 
 const StyledButton = styled(Button)`
-    width: 200px;
+    width: 100%;
+`;
+
+const StyledDiv = styled.div`
+    width: 50%;
+    height: 70%;
+    position: fixed;
+    top: 70%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+`;
+
+const StyledP = styled.p`
+    color: red;
+    font-weight: bolder;
+    font-size: 3em;
 `;
 
 class Loginform extends React.Component {
@@ -53,14 +69,14 @@ class Loginform extends React.Component {
             }}/>;           
 
         return(
-            <div>
+            <StyledDiv>
                 <Form onSubmit={this.submitLogin} className="login-form">
                     <Form.Item>
                       {getFieldDecorator('username', {
                         rules: [{ required: true, message: 'Please input your username!' }],
                       })(
                         <Input
-                          prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
+                          prefix={<Icon type="user" style={{ color: 'rgba(0,255,0,.8)' }} />}
                           placeholder="Username"
                         />,
                       )}
@@ -70,7 +86,7 @@ class Loginform extends React.Component {
                         rules: [{ required: true, message: 'Please input your password!' }],
                       })(
                         <Input
-                          prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
+                          prefix={<Icon type="lock" style={{ color: 'rgba(255,0,0,.8)' }} />}
                           placeholder="Password"
                           type="password"
                         />,
@@ -83,8 +99,8 @@ class Loginform extends React.Component {
                         Sign Up
                     </NavLink>
                 </StyledButton>
-                <p>{this.state.errorMssg}</p>
-            </div>
+                <StyledP>{this.state.errorMssg}</StyledP>
+            </StyledDiv>
         )
     }
 }

@@ -1,17 +1,60 @@
 import React from 'react';
 import {NavLink} from 'react-router-dom';
+import { Layout, Menu, Breadcrumb, Icon } from 'antd';
 
+const { Header, Content, Sider } = Layout;
 class Navbar extends React.Component{
     render(){
         return(
-            <div>   
-                <NavLink to={{pathname: '/loggedIn', state: this.props.user}}>Dashboard</NavLink>
-                <NavLink to={{pathname: '/loggedIn/update', state: this.props.user}}>Update Profile</NavLink>
-                <NavLink to={{pathname: '/loggedIn/postArt', state: this.props.user}}>Post Image</NavLink>
-                <NavLink to={{pathname: '/loggedIn/pokedex', state: this.props.user}}>Pokedex</NavLink>
-                <NavLink to={{pathname: '/loggedIn/favorites', state: this.props.user}}>Favorite Pokemons</NavLink>
-                <NavLink to={'/'}>Logoff</NavLink>
-            </div>
+            <Layout>
+                <Header className="header">
+                  <div className="logo" />
+                  <Menu
+                    theme="dark"
+                    mode="horizontal"
+                    defaultSelectedKeys={['1']}
+                    style={{ lineHeight: '64px' }}
+                  >
+
+                    <Menu.Item key="1" style={{ 'margin-right': '20%' }}>
+                        <NavLink to={{pathname: '/loggedIn', state: this.props.user}}>
+                            <Icon type="crown" spin="true"/>
+                            Dashboard
+                        </NavLink>
+                    </Menu.Item>
+                    <Menu.Item key="2">
+                        <NavLink to={{pathname: '/loggedIn/favorites', state: this.props.user}}>
+                            <Icon type="heart" spin="true"/>
+                            Favorite Pokemons
+                        </NavLink>
+                    </Menu.Item>
+                    <Menu.Item key="3">
+                        <NavLink to={{pathname: '/loggedIn/update', state: this.props.user}}>
+                            <Icon type="thunderbolt" spin="true"/>
+                            Update Profile
+                        </NavLink>
+                    </Menu.Item>
+                    <Menu.Item key="4">
+                        <NavLink to={{pathname: '/loggedIn/postArt', state: this.props.user}}>
+                            <Icon type="file-image" spin="true"/>
+                            Post Image
+                        </NavLink>
+                    </Menu.Item>
+                    <Menu.Item key="5">
+                        <NavLink to={{pathname: '/loggedIn/pokedex', state: this.props.user}}>
+                            <Icon type="api" spin="true"/>
+                            Pokedex
+                        </NavLink>
+                    </Menu.Item>
+                    <Menu.Item key="6">
+                        <NavLink to={'/'}>
+                            <Icon type="frown" spin="true"/>
+                            Logoff
+                        </NavLink>
+                    </Menu.Item>
+                  </Menu>
+                </Header>   
+            </Layout>
         )
     }
 }
