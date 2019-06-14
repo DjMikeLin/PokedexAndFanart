@@ -2,6 +2,7 @@ import React from 'react';
 import Navbar from './Navbar';
 import {pokedex} from './axiosRouter'; 
 import PokedexEntry from './PokedexEntry';
+import LoadingPage from './LoadingPage';
 import styled from 'styled-components';
 
 const StyledDiv = styled.div`
@@ -18,11 +19,12 @@ class Pokedex extends React.Component{
             password: '',
             fanarts: [],
             favorites: []
-        } 
+        },
+        loading: true 
     }
     //put the initial 30 pokes from pokedex into currDex when component loads
     componentDidMount = async() => {
-        this.setState({currDex: (await pokedex(0)).data, user: this.props.location.state}); 
+        await this.setState({loading: false, currDex: (await pokedex(0)).data, user: this.props.location.state}); 
     }
 
     updateFav = user => {
@@ -31,6 +33,7 @@ class Pokedex extends React.Component{
 
     render(){
         return(
+            this.state.loading ? <LoadingPage /> :
             <div>
                 <Navbar user={this.state.user}/>
                 <StyledDiv>
@@ -40,7 +43,7 @@ class Pokedex extends React.Component{
                         })
                     }
                 </StyledDiv>
-            </div> 
+            </div>  
         )
     }
 }
