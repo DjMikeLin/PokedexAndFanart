@@ -1,8 +1,8 @@
 import React from 'react';
 import {NavLink} from 'react-router-dom';
-import { Layout, Menu, Breadcrumb, Icon } from 'antd';
+import { Layout, Menu, Icon } from 'antd';
 
-const { Header, Content, Sider } = Layout;
+const { Header } = Layout;
 class Navbar extends React.Component{
     render(){
         return(
@@ -16,7 +16,7 @@ class Navbar extends React.Component{
                     style={{ lineHeight: '64px' }}
                   >
 
-                    <Menu.Item key="1" style={{ 'margin-right': '20%' }}>
+                    <Menu.Item key="1" style={{ 'marginRight': '20%' }}>
                         <NavLink to={{pathname: '/loggedIn', state: this.props.user}}>
                             <Icon type="crown" spin="true"/>
                             Dashboard

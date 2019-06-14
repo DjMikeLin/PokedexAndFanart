@@ -1,6 +1,29 @@
 import React from 'react';
 import {updateUser, deleteUser} from './axiosRouter';
 import {Redirect} from 'react-router-dom';
+import Navbar from './Navbar';
+import { Form, Icon, Input, Button } from 'antd';
+import styled from 'styled-components';
+
+const StyledButton = styled(Button)`
+    width: 100%;
+`;
+
+const StyledDiv = styled.div`
+    width: 50%;
+    height: 70%;
+    position: fixed;
+    top: 70%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+`;
+
+const StyledP = styled.p`
+    color: red;
+    font-weight: bolder;
+    font-size: 3em;
+`;
 
 class UpdateUser extends React.Component{
     state = {
@@ -20,24 +43,19 @@ class UpdateUser extends React.Component{
         this.setState({user: this.props.location.state});
     }
 
-    handleChange = e => {
-        if(this.state.errorMssg !== '')
-            this.setState({errorMssg: ''});
-
-        const userCopy = {...this.state.user};
-        userCopy[e.target.name] = e.target.value;
-        this.setState({user: userCopy});
-    }
-
     handleSubmit = async(e) => {
         e.preventDefault();
+        this.props.form.validateFields(async(err, values) => {
         try{
-            await updateUser(this.state.user);
-            this.setState({redirectAfterUpdate: true});
+            const userCopy = {...this.state.user};
+            userCopy.user_name = values.username === undefined ? this.state.user.user_name : values.username;
+            userCopy.password = values.password === undefined ? this.state.user.password : values.password;
+            await updateUser(userCopy);
+            this.setState({redirectAfterUpdate: true, user: userCopy, errorMssg: ''});
         }catch(err){
             console.log(err.code);
             this.setState({errorMssg: "Username taken!"});
-        }
+        }});
     }
 
     delete = async(e) => {
@@ -48,6 +66,8 @@ class UpdateUser extends React.Component{
     }
 
     render(){
+        const { getFieldDecorator } = this.props.form;
+        
         if(this.state.redirectAfterDelete)
             return <Redirect to="/"/>
 
@@ -56,17 +76,37 @@ class UpdateUser extends React.Component{
 
         return(
             <div>
-                <form onSubmit={this.handleSubmit}>
-                    <label>Username: </label>
-                    <input type="text" name="user_name" onChange={this.handleChange} placeholder={this.state.user.user_name}/>
-                    <label>Password: </label>
-                    <input type="password" name="password" onChange={this.handleChange} placeholder={this.state.user.password}/>
-                    <button type="submit">Update</button>
-                </form>
-                <button onClick={this.delete}>Delete Account</button>
-                <p>{this.state.errorMssg}</p> 
+                <Navbar user={this.state.user}/>
+                <StyledDiv>
+                    <Form onSubmit={this.handleSubmit}>
+                        <Form.Item>
+                            {getFieldDecorator('username', {
+                            
+                            })(
+                            <Input
+                              prefix={<Icon type="user" style={{ color: 'rgba(0,255,0,.8)' }} />}
+                              placeholder={this.state.user.user_name}
+                            />,
+                            )}
+                        </Form.Item>
+                        <Form.Item>
+                            {getFieldDecorator('password', {
+
+                            })(
+                            <Input
+                              prefix={<Icon type="lock" style={{ color: 'rgba(255,0,0,.8)' }} />}
+                              placeholder={this.state.user.password}
+                            />
+                            )}
+                        </Form.Item>
+                        <StyledButton type="primary" value="large" htmlType="submit">Update</StyledButton>
+                    </Form>
+                    <StyledButton type="primary" value="large" onClick={this.delete}>Delete Account</StyledButton>
+                    <StyledP>{this.state.errorMssg}</StyledP> 
+                </StyledDiv>
             </div>
         )
     }
 }
-export default UpdateUser; 
+const UserUpdate = Form.create({ name: 'update_user' })(UpdateUser);
+export default UserUpdate; 

@@ -1,5 +1,15 @@
 import React from 'react';
 import {deleteFavorite} from './axiosRouter';
+import {Button} from 'antd';
+import styled from 'styled-components';
+
+const StyledP = styled.p`
+    color: #1890ff;
+`;
+
+const StyledDiv = styled.div`
+    margin-left: 50%;
+`;
 
 class FavoriteEntry extends React.Component{
     state = {
@@ -19,10 +29,10 @@ class FavoriteEntry extends React.Component{
     render(){
         return(
             !this.state.deleted ?
-            <div>
-                <p>{this.props.entry.favorite_pokemon}</p>
-                <button onClick={this.deleteFav}>Delete</button>
-            </div> : null
+            <StyledDiv>
+                <StyledP>{this.props.entry.favorite_pokemon}</StyledP>
+                <Button type="primary" value="large" onClick={this.deleteFav}>Delete</Button>
+            </StyledDiv> : null
         )
     }
 }

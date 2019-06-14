@@ -22,14 +22,13 @@ class Favorites extends React.Component{
     }
 
     render(){
-        console.log(this.props.location.state);
         return(
             <div>
                 <Navbar user={this.state.user}/>
                 {
                     this.props.location.state.favorites.map((element, index) => {
                         return <FavoriteEntry key={index} index={index} entry={element} user={this.props.location.state} updateFavs={this.updateFavs}/>; 
-                     })
+                    })
                 }
             </div>
         )

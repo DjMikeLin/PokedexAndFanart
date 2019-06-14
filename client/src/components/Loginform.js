@@ -46,7 +46,7 @@ class Loginform extends React.Component {
                     return;
                 }
                 //default
-                this.setState({showLogin: false, id: result.id, fanarts: result.fanarts, favorites: result.favorites});
+                this.setState({showLogin: false, id: result.id, user_name: result.user_name, password: result.password, fanarts: result.fanarts, favorites: result.favorites});
             }
         });
     }
