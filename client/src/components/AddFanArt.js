@@ -1,6 +1,26 @@
 import React from 'react';
 import {addArt, deleteImage} from './axiosRouter';
 import Navbar from './Navbar';
+import { Form, Icon, Input, Button } from 'antd';
+import styled from 'styled-components';
+
+const StyledButton = styled(Button)`
+    width: 100%;
+`;
+
+const StyledP = styled.p`
+    color: red;
+    font-weight: bolder;
+    font-size: 3em;
+`;
+
+const StyledImage = styled.img`
+    max-width: 500px;
+    max-height: 500px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+`;
 
 class AddFanArt extends React.Component{
     state = {
@@ -26,6 +46,7 @@ class AddFanArt extends React.Component{
         else
             this.setState({currUrl: e.target.value});
     }
+
     //Handler for img onError to see if url is an actual image
     invalidURL = e => {
         this.setState({errorMssg: 'Not a proper image URL!'});
@@ -44,29 +65,31 @@ class AddFanArt extends React.Component{
 
     handleSubmit = async(e) => {
         e.preventDefault();
-
-        if(this.state.errorMssg !== ''){   
-            this.setState({showError: true});
-            return;
-        }
-        else if(this.state.currUrl.length > 500){
-            this.setState({showError: true, errorMssg: 'URL is too long! Concider using an URL shortener.'});
-            return;
-        }
-        else if(this.duplicateImage(this.state.currUrl)){
-            this.setState({showError: true, errorMssg: 'Already added an image with this URL!'});
-            return;
-        }
-        //default case 
-        let result = (await addArt(this.state.currUrl, this.props.location.state.id)).data;
-        const userCopy = {...this.state.user};
-        userCopy.fanarts.push(result);
-        this.setState({showError: true, errorMssg: 'Successfully added image! Please feel free to add another', user: userCopy});  
+        this.props.form.validateFields(async(err, values) => {
+            if(!err){
+                if(this.state.errorMssg !== ''){   
+                    this.setState({showError: true});
+                    return;
+                }
+                else if(this.state.currUrl.length > 500){
+                    this.setState({showError: true, errorMssg: 'URL is too long! Concider using an URL shortener.'});
+                    return;
+                }
+                else if(this.duplicateImage(values.url)){
+                    this.setState({showError: true, errorMssg: 'Already added an image with this URL!'});
+                    return;
+                }
+                //default case 
+                let result = (await addArt(values.url, this.props.location.state.id)).data;
+                const userCopy = {...this.state.user};
+                userCopy.fanarts.push(result);
+                this.setState({showError: true, errorMssg: 'Successfully added image! Please feel free to add another', user: userCopy});  
+            }
+        });
     }
     //handler for deleting a specific fanArt
     deleteImage = async(e) => {
         e.preventDefault();
-        
         let fanArtIndex = e.target.parentElement.getAttribute('index'); 
         let fanArtModelId = this.state.user.fanarts[fanArtIndex].id;
         //Delete from database
@@ -78,23 +101,33 @@ class AddFanArt extends React.Component{
     }
 
     render(){
+        const { getFieldDecorator } = this.props.form;
         return(
             <div>
                 <Navbar user={this.state.user}/>
-                <form onSubmit={this.handleSubmit}>
-                    <label>Image URL</label>
-                    <input type="url" name="url" onChange={this.urlChange}/>
-                    <button type="submit">Post</button>
-                </form>
-                <img src={this.state.currUrl} alt='' onError={this.invalidURL}/>
+                <Form onSubmit={this.handleSubmit}>
+                    <Form.Item>
+                      {getFieldDecorator('url', {
+                        rules: [{ required: true, message: 'Please input a url with a image extension!' }],
+                      })(
+                        <Input
+                          prefix={<Icon type="file-image" theme="filled" style={{ color: 'rgba(0,255,0,.8)' }} />}
+                          placeholder="Ex: https://i.pinimg.com/originals/05/de/c6/05dec65a440a989f71628da2d76db0f9.jpg"
+                          onChange={this.urlChange}
+                        />
+                      )}
+                    </Form.Item>
+                    <StyledButton type="primary" value="large" htmlType="submit">Post</StyledButton>
+                </Form>
+                <StyledImage src={this.state.currUrl} alt='' onError={this.invalidURL}/>
                 {
-                    this.state.showError ? <p>{this.state.errorMssg}</p> : null
+                    this.state.showError ? <StyledP>{this.state.errorMssg}</StyledP> : null
                 }
                 {
                     this.state.user.fanarts.map((element, index) =>
                         <div key={index} index={index}> 
-                            <img src={element.url} alt="Not Found"/>
-                            <button onClick={this.deleteImage}>Delete</button> 
+                            <StyledImage src={element.url} alt="Not Found"/>
+                            <StyledButton type="primary" value="large" onClick={this.deleteImage}>Delete</StyledButton> 
                         </div>
                     )
                 }
@@ -102,4 +135,5 @@ class AddFanArt extends React.Component{
         )
     }
 }
-export default AddFanArt; 
+const PostImage = Form.create({ name: 'post_image' })(AddFanArt);
+export default PostImage; 
