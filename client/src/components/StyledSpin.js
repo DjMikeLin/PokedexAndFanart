@@ -9,7 +9,6 @@ const color = RandomColor();
 
 const style = {
     background: color,
-    borderRadius: '10em',
     width: '4%',
 };
         return(

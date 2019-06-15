@@ -43,7 +43,7 @@ class Pokedex extends React.Component{
                         })
                     }
                 </StyledDiv>
-            </div>  
+            </div> 
         )
     }
 }
