@@ -2,6 +2,7 @@ from rest_framework import viewsets
 from .serializers import UserSerializer, FavoriteSerializer, FanArtSerializer
 from .models import User, Favorite, FanArt 
 import requests
+import re
 from rest_framework.response import Response
 
 class UsersList(viewsets.ModelViewSet):
@@ -25,8 +26,9 @@ class FanArtList(viewsets.ModelViewSet):
 
 class PokedexList(viewsets.ViewSet):
     def list(self, request, offset):
-        results = requests.get(f'https://pokeapi.co/api/v2/pokemon/?offset={offset}&limit=30').json()['results'];
-        for result in results:
-            result['url'] = requests.get(result['url']).json()['sprites']['front_default']
+        results = requests.get(f'https://pokeapi.co/api/v2/pokemon/?offset={offset}&limit=30').json()
+        for result in results['results']:
+            id = re.search(r'(?<=https://pokeapi.co/api/v2/pokemon/)\d*', result['url'], flags=0).group(0)
+            result['url'] = f'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/{id}.png' 
         
         return Response(results)

@@ -29,19 +29,19 @@ class Pokedex extends React.Component{
     //put the initial 30 pokes from pokedex into currDex when component loads
     componentDidMount = async() => {
         let dex = (await pokedex(this.state.offset)).data;
-        await this.setState({loading: false, currDex: dex, user: this.props.location.state}); 
+        await this.setState({loading: false, total: dex.count, currDex: dex.results, user: this.props.location.state}); 
     }
 
     updateFav = user => {
         this.setState({user});
     }
-
+    //Pagination change handler
     pageChange = async(num) => {
         let newOffset = this.getOffset(num);
         await this.setState({loading: true, offset: newOffset, currPage: num});
-        await this.setState({loading: false, currDex: (await pokedex(newOffset)).data}); 
+        await this.setState({loading: false, currDex: (await pokedex(newOffset)).data.results}); 
     }
-
+    //find offset value base on num param
     getOffset = num => {
         return (num * 30) - 30;
     }
@@ -58,7 +58,7 @@ class Pokedex extends React.Component{
                         })
                     }
                 </StyledDiv>
-                <Pagination showQuickJumper defaultCurrent={this.state.currPage} total={320} onChange={this.pageChange}/>
+                <Pagination showQuickJumper defaultCurrent={this.state.currPage} pageSize={30} total={this.state.total} onChange={this.pageChange}/>
             </div> 
         )
     }
