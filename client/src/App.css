@@ -1,1 +1,7 @@
 @import '~antd/dist/antd.css';
+
+body{
+    background-repeat: repeat;
+    background-size: cover;
+    background-image: url('http://25.media.tumblr.com/fbb96a4b42c26fc2aa303924ad4cfd2b/tumblr_mho10qt37d1reats2o1_r1_500.gif');
+}

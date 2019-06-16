@@ -3,9 +3,11 @@ import {findUser} from './axiosRouter';
 import {Redirect, NavLink} from 'react-router-dom';
 import { Form, Icon, Input, Button } from 'antd';
 import styled from 'styled-components';
+import Pokeballs from './Pokeballs';
 
 const StyledButton = styled(Button)`
     width: 100%;
+    margin-bottom: 2%;
 `;
 
 const StyledDiv = styled.div`
@@ -22,6 +24,10 @@ const StyledP = styled.p`
     color: red;
     font-weight: bolder;
     font-size: 3em;
+`;
+
+const StyledGif = styled.img`
+    width: 50%;
 `;
 
 class Loginform extends React.Component {
@@ -69,7 +75,10 @@ class Loginform extends React.Component {
             }}/>;           
 
         return(
+            <div>
+                        <StyledGif src="https://i.ibb.co/n19P925/Snorlax.gif"/>
             <StyledDiv>
+                <Pokeballs />
                 <Form onSubmit={this.submitLogin} className="login-form">
                     <Form.Item>
                       {getFieldDecorator('username', {
@@ -86,7 +95,7 @@ class Loginform extends React.Component {
                         rules: [{ required: true, message: 'Please input your password!' }],
                       })(
                         <Input
-                          prefix={<Icon type="lock" style={{ color: 'rgba(255,0,0,.8)' }} />}
+                          prefix={<Icon type="lock" style={{ color: 'rgba(255,0,0,.8)'}} />}
                           placeholder="Password"
                           type="password"
                         />,
@@ -99,8 +108,11 @@ class Loginform extends React.Component {
                         Sign Up
                     </NavLink>
                 </StyledButton>
+                <Pokeballs />
                 <StyledP>{this.state.errorMssg}</StyledP>
             </StyledDiv>
+                <StyledGif src="https://i.ibb.co/sHkQd50/Slaking.gif"/>
+            </div>
         )
     }
 }

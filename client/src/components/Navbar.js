@@ -12,7 +12,7 @@ class Navbar extends React.Component{
                   <Menu
                     theme="dark"
                     mode="horizontal"
-                    defaultSelectedKeys={['1']}
+                    defaultSelectedKeys={[this.props.selected]}
                     style={{ lineHeight: '64px' }}
                   >
 

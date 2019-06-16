@@ -2,13 +2,25 @@ import React from 'react';
 import {deleteFavorite} from './axiosRouter';
 import {Button} from 'antd';
 import styled from 'styled-components';
+import Pokeball from './Pokeball';
 
 const StyledP = styled.p`
+    margin-left: 50%;
+    text-transform: capitalize;
+    font-weight: bolder;
+    font-size: 2em;
     color: #1890ff;
+`;
+
+const Wrapper = styled.div`
+    background-color: rgb(125, 120, 120, .5);
 `;
 
 const StyledDiv = styled.div`
     margin-left: 50%;
+    display: flex;
+    justify-contents: center;
+    align-items: center;
 `;
 
 class FavoriteEntry extends React.Component{
@@ -29,10 +41,13 @@ class FavoriteEntry extends React.Component{
     render(){
         return(
             !this.state.deleted ?
-            <StyledDiv>
+            <Wrapper>
                 <StyledP>{this.props.entry.favorite_pokemon}</StyledP>
-                <Button type="primary" value="large" onClick={this.deleteFav}>Delete</Button>
-            </StyledDiv> : null
+                <StyledDiv>
+                    <Pokeball />
+                    <Button type="primary" value="large" onClick={this.deleteFav}>Delete</Button>
+                </StyledDiv>
+            </Wrapper> : null
         )
     }
 }

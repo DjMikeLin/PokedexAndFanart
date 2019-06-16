@@ -2,11 +2,13 @@ import React from 'react';
 import {updateUser, deleteUser} from './axiosRouter';
 import {Redirect} from 'react-router-dom';
 import Navbar from './Navbar';
+import Pokeballs from './Pokeballs';
 import { Form, Icon, Input, Button } from 'antd';
 import styled from 'styled-components';
 
 const StyledButton = styled(Button)`
     width: 100%;
+    margin-bottom: 2%;
 `;
 
 const StyledDiv = styled.div`
@@ -17,6 +19,9 @@ const StyledDiv = styled.div`
     left: 50%;
     -webkit-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-image: url("https://i.ibb.co/VD0Tp8s/Kyogre-Primal.gif"); 
 `;
 
 const StyledP = styled.p`
@@ -76,8 +81,9 @@ class UpdateUser extends React.Component{
 
         return(
             <div>
-                <Navbar user={this.state.user}/>
+                <Navbar user={this.state.user} selected="3"/>
                 <StyledDiv>
+                    <Pokeballs />
                     <Form onSubmit={this.handleSubmit}>
                         <Form.Item>
                             {getFieldDecorator('username', {
@@ -102,6 +108,7 @@ class UpdateUser extends React.Component{
                         <StyledButton type="primary" value="large" htmlType="submit">Update</StyledButton>
                     </Form>
                     <StyledButton type="primary" value="large" onClick={this.delete}>Delete Account</StyledButton>
+                    <Pokeballs />
                     <StyledP>{this.state.errorMssg}</StyledP> 
                 </StyledDiv>
             </div>

@@ -50,7 +50,7 @@ class Pokedex extends React.Component{
         return(
             this.state.loading ? <LoadingPage /> :
             <div>
-                <Navbar user={this.state.user}/>
+                <Navbar user={this.state.user} selected="5"/>
                 <StyledDiv>
                     {
                         this.state.currDex.map((element, index) => {

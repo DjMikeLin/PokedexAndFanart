@@ -104,7 +104,7 @@ class AddFanArt extends React.Component{
         const { getFieldDecorator } = this.props.form;
         return(
             <div>
-                <Navbar user={this.state.user}/>
+                <Navbar user={this.state.user} selected="4"/>
                 <Form onSubmit={this.handleSubmit}>
                     <Form.Item>
                       {getFieldDecorator('url', {
