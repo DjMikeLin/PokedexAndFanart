@@ -1,7 +1,7 @@
 import React from 'react';
 import {addArt, deleteImage} from './axiosRouter';
 import Navbar from './Navbar';
-import { Form, Icon, Input, Button } from 'antd';
+import { Form, Icon, Input, Button, Upload, message } from 'antd';
 import styled from 'styled-components';
 
 const StyledButton = styled(Button)`
@@ -22,6 +22,29 @@ const StyledImage = styled.img`
     margin-right: auto;
 `;
 
+const Dragger = Upload.Dragger;
+const props = {
+  data: {
+        url: "https://cdn.vox-cdn.com/thumbor/3ajecDMOIH59cbOeyO0bap_4wj4=/0x0:2257x1320/1200x800/filters:focal(949x480:1309x840)/cdn.vox-cdn.com/uploads/chorus_image/image/63738986/pokemon.0.0.png",
+        file: "http://localhost:8000/api/v1/fanarts/https%3A/assets.pokemon.com/assets/cms2/img/pokedex/full/025.png",
+        user: 14 
+  },
+  name: 'file',
+  multiple: true,
+  action: '/api/v1/fanarts/',
+  onChange(info) {
+    const status = info.file.status;
+    console.log(info.file)
+    if (status !== 'uploading') {
+      console.log(info.file, info.fileList);
+    }
+    if (status === 'done') {
+      message.success(`${info.file.name} file uploaded successfully.`);
+    } else if (status === 'error') {
+      message.error(`${info.file.name} file upload failed.`);
+    }
+  },
+};
 class AddFanArt extends React.Component{
     state = {
         currUrl: '',
@@ -131,6 +154,13 @@ class AddFanArt extends React.Component{
                         </div>
                     )
                 }
+                  <Dragger {...props}>
+    <p className="ant-upload-drag-icon">
+      <Icon type="inbox" />
+    </p>
+    <p className="ant-upload-text">Click or drag file to this area to upload</p>
+    <p className="ant-upload-hint">Support for a single or bulk upload. Strictly prohibit from uploading company data or other band files</p>
+  </Dragger>
             </div>
         )
     }

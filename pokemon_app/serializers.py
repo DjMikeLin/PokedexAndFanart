@@ -5,7 +5,7 @@ import requests
 class FanArtSerializer(serializers.ModelSerializer):
     class Meta:
         model = FanArt
-        fields = ("id", "url", "create_date", "user") 
+        fields = ("id", "url", "file", "create_date", "user") 
 
 class FavoriteSerializer(serializers.ModelSerializer):
     class Meta:
