@@ -21,7 +21,16 @@ const StyledImage = styled.img`
     margin-left: auto;
     margin-right: auto;
 `;
-
+function getBase64(file, cb) {
+    let reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = function () {
+        cb(reader.result)
+    };
+    reader.onerror = function (error) {
+        console.log('Error: ', error);
+    };
+}
 const Dragger = Upload.Dragger;
 const props = {
   data: {
@@ -34,7 +43,11 @@ const props = {
   action: '/api/v1/fanarts/',
   onChange(info) {
     const status = info.file.status;
-    console.log(info.file)
+let idCardBase64 = '';
+getBase64(info.file, (result) => {
+     idCardBase64 = result;
+});
+console.log(idCardBase64);
     if (status !== 'uploading') {
       console.log(info.file, info.fileList);
     }
