@@ -3,6 +3,7 @@ import {createUser} from './axiosRouter';
 import {Redirect} from 'react-router-dom';
 import { Form, Icon, Input, Button } from 'antd';
 import styled from 'styled-components';
+import Pokeballs from './Pokeballs';
 
 const StyledButton = styled(Button)`
     width: 100%;
@@ -56,6 +57,7 @@ class CreateUser extends React.Component{
 
         return(
             <StyledDiv>
+                <Pokeballs />
                 <Form onSubmit={this.handleSubmit}>
                     <Form.Item>
                       {getFieldDecorator('username', {
@@ -81,6 +83,7 @@ class CreateUser extends React.Component{
                     <StyledButton type="primary" value="large" htmlType="submit">Create Account</StyledButton>
                 </Form>
                 <StyledP>{this.state.errorMssg}</StyledP>
+                <Pokeballs />
             </StyledDiv> 
         )
     }

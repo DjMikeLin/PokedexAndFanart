@@ -11,6 +11,13 @@ const StyledDiv = styled.div`
     flex-wrap: wrap;
 `;
 
+const Wrapper = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+`;
+
 class Pokedex extends React.Component{
     state = {
         currDex: [],
@@ -51,14 +58,80 @@ class Pokedex extends React.Component{
             this.state.loading ? <LoadingPage /> :
             <div>
                 <Navbar user={this.state.user} selected="5"/>
-                <StyledDiv>
-                    {
-                        this.state.currDex.map((element, index) => {
-                            return <PokedexEntry key={index} entry={element} user={this.state.user} updateFav={this.updateFav}/>; 
-                        })
-                    }
-                </StyledDiv>
-                <Pagination showQuickJumper defaultCurrent={this.state.currPage} pageSize={30} total={this.state.total} onChange={this.pageChange}/>
+                <Wrapper>
+                    <Pagination showQuickJumper defaultCurrent={this.state.currPage} pageSize={30} total={this.state.total} onChange={this.pageChange}/>
+                    <StyledDiv>
+                        {
+                            this.state.currDex.slice(0, 3).map((element, index) => {
+                                return <PokedexEntry key={index} entry={element} user={this.state.user} updateFav={this.updateFav}/>; 
+                            })
+                        }
+                    </StyledDiv>
+                    <StyledDiv>
+                        {
+                            this.state.currDex.slice(3, 6).map((element, index) => {
+                                return <PokedexEntry key={index} entry={element} user={this.state.user} updateFav={this.updateFav}/>; 
+                            })
+                        }
+                    </StyledDiv>
+                    <StyledDiv>
+                        {
+                            this.state.currDex.slice(6, 9).map((element, index) => {
+                                return <PokedexEntry key={index} entry={element} user={this.state.user} updateFav={this.updateFav}/>; 
+                            })
+                        }
+                    </StyledDiv>
+                    <StyledDiv>
+                        {
+                            this.state.currDex.slice(9, 12).map((element, index) => {
+                                return <PokedexEntry key={index} entry={element} user={this.state.user} updateFav={this.updateFav}/>; 
+                            })
+                        }
+                    </StyledDiv>
+                    <StyledDiv>
+                        {
+                            this.state.currDex.slice(12, 15).map((element, index) => {
+                                return <PokedexEntry key={index} entry={element} user={this.state.user} updateFav={this.updateFav}/>; 
+                            })
+                        }
+                    </StyledDiv>
+                    <StyledDiv>
+                        {
+                            this.state.currDex.slice(15, 18).map((element, index) => {
+                                return <PokedexEntry key={index} entry={element} user={this.state.user} updateFav={this.updateFav}/>; 
+                            })
+                        }
+                    </StyledDiv>
+                    <StyledDiv>
+                        {
+                            this.state.currDex.slice(18, 21).map((element, index) => {
+                                return <PokedexEntry key={index} entry={element} user={this.state.user} updateFav={this.updateFav}/>; 
+                            })
+                        }
+                    </StyledDiv>
+                    <StyledDiv>
+                        {
+                            this.state.currDex.slice(21, 24).map((element, index) => {
+                                return <PokedexEntry key={index} entry={element} user={this.state.user} updateFav={this.updateFav}/>; 
+                            })
+                        }
+                    </StyledDiv>
+                    <StyledDiv>
+                        {
+                            this.state.currDex.slice(24, 27).map((element, index) => {
+                                return <PokedexEntry key={index} entry={element} user={this.state.user} updateFav={this.updateFav}/>; 
+                            })
+                        }
+                    </StyledDiv>
+                    <StyledDiv>
+                        {
+                            this.state.currDex.slice(27, 30).map((element, index) => {
+                                return <PokedexEntry key={index} entry={element} user={this.state.user} updateFav={this.updateFav}/>; 
+                            })
+                        }
+                    </StyledDiv>
+                    <Pagination showQuickJumper defaultCurrent={this.state.currPage} pageSize={30} total={this.state.total} onChange={this.pageChange}/>
+                </Wrapper>
             </div> 
         )
     }

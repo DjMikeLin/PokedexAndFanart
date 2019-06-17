@@ -12,7 +12,7 @@ const styles = StyleSheet.create({
 class Pokeball extends React.Component{
     render(){
         return(
-            <img className={css(styles.rotateIn)} src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/poke-ball.png" alt="No Image Found"/>
+            <img className={css(styles.rotateIn)} alt="" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/poke-ball.png"/>
         )
     }
 }

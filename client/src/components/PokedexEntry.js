@@ -8,13 +8,14 @@ const StyledDiv = styled.div`
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    margin-bottom: 1em;
     height: 8%;
+    background-color: rgb(56, 66, 81, .8);
 `;
 
 const StyledP = styled.p`
-    color: #1890ff;
+    color: rgb(255, 0, 135);
     text-transform: capitalize;
+    font-weight: bold;
 `;
 
 class PokedexEntry extends React.Component{
