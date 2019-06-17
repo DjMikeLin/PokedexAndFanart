@@ -40,14 +40,13 @@ class FavoriteEntry extends React.Component{
 
     render(){
         return(
-            !this.state.deleted ?
             <Wrapper>
                 <StyledP>{this.props.entry.favorite_pokemon}</StyledP>
                 <StyledDiv>
                     <Pokeball />
                     <Button type="primary" value="large" onClick={this.deleteFav}>Delete</Button>
                 </StyledDiv>
-            </Wrapper> : null
+            </Wrapper>
         )
     }
 }

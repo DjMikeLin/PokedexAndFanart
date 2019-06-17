@@ -26,8 +26,8 @@ class Favorites extends React.Component{
             <div>
                 <Navbar user={this.state.user} selected="2"/>
                 {
-                    this.props.location.state.favorites.map((element, index) => {
-                        return <FavoriteEntry key={index} index={index} entry={element} user={this.props.location.state} updateFavs={this.updateFavs}/>; 
+                    this.state.user.favorites.map((element, index) => {
+                        return <FavoriteEntry key={index} index={index} entry={element} user={this.state.user} updateFavs={this.updateFavs}/>; 
                     })
                 }
             </div>
