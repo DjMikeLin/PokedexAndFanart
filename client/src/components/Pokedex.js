@@ -8,7 +8,6 @@ import { Pagination } from 'antd';
 
 const StyledDiv = styled.div`
     display: flex;
-    flex-wrap: wrap;
 `;
 
 const Wrapper = styled.div`
@@ -59,7 +58,7 @@ class Pokedex extends React.Component{
             <div>
                 <Navbar user={this.state.user} selected="5"/>
                 <Wrapper>
-                    <Pagination showQuickJumper defaultCurrent={this.state.currPage} pageSize={30} total={this.state.total} onChange={this.pageChange}/>
+                    <Pagination showQuickJumper style={{background: '#1890ff', marginTop: '2%', fontWeight: 'bolder'}} defaultCurrent={this.state.currPage} pageSize={30} total={this.state.total} onChange={this.pageChange}/>
                     <StyledDiv>
                         {
                             this.state.currDex.slice(0, 3).map((element, index) => {
@@ -130,7 +129,7 @@ class Pokedex extends React.Component{
                             })
                         }
                     </StyledDiv>
-                    <Pagination showQuickJumper defaultCurrent={this.state.currPage} pageSize={30} total={this.state.total} onChange={this.pageChange}/>
+                    <Pagination showQuickJumper style={{background: '#1890ff', fontWeight: 'bolder'}} defaultCurrent={this.state.currPage} pageSize={30} total={this.state.total} onChange={this.pageChange}/>
                 </Wrapper>
             </div> 
         )

@@ -10,6 +10,8 @@ const StyledDiv = styled.div`
     justify-content: center;
     height: 8%;
     background-color: rgb(56, 66, 81, .8);
+    margin-right: 2%;
+    margin-bottom: 2%;
 `;
 
 const StyledP = styled.p`
@@ -64,8 +66,8 @@ class PokedexEntry extends React.Component{
         return(
             <StyledDiv>
                 <StyledP>{this.props.entry.name}</StyledP>
-                <img src={this.props.entry.url} alt=''/> 
                 <Icon type="heart" theme={this.state.theme} onClick={this.toggleFav} style={{ color: '#ff0087'}}/>
+                <img src={this.props.entry.url} alt=''/> 
             </StyledDiv>   
         )
     }
