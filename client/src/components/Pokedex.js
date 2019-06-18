@@ -65,7 +65,7 @@ class Pokedex extends React.Component{
     }
 
     renderDexes = () =>
-        [...new Array(10).keys()].map(n => this.renderDex(n, n + 3))
+        [...new Array(10).keys()].map(n => this.renderDex(n * 3, (n * 3) + 3))
 
     render(){
         return(
