@@ -1,5 +1,5 @@
 *.swp
-/settings.sql
+
 # Logs
 logs
 *.log
