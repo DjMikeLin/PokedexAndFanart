@@ -4,6 +4,10 @@ export async function findUser(userName){
     return await axios.get('/api/v1/users/find/' + userName);
 }
 
+export async function getUsers(){
+    return await axios.get('/api/v1/users/');
+}
+
 export async function createUser(userName, password){
     return await axios.post('/api/v1/users/', {"user_name": userName, password});
 }

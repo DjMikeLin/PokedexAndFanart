@@ -7,6 +7,7 @@ import UpdateUser from './components/UpdateUser';
 import AddFanArt from './components/AddFanArt';
 import Pokedex from './components/Pokedex';
 import Favorites from './components/Favorites';
+import PreLogin from './components/PreLogin';
 import './App.css';
 
 function App() {
@@ -14,7 +15,8 @@ function App() {
         <div>{
             <Router>
                 <Switch>
-                    <Route exact path="/" component={Loginform}/>
+                    <Route exact path="/" component={PreLogin}/>
+                    <Route exact path="/login" component={Loginform}/>
                     <Route exact path="/newAccount" component={CreateUser}/>
                     <Route exact path="/loggedIn" component={Homepage}/>
                     <Route exact path="/loggedIn/update" component={UpdateUser}/>
